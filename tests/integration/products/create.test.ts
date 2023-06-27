@@ -11,7 +11,7 @@ describe('POST /products', function () {
   beforeEach(function () {
     sinon.restore();
   });
-  it('Deve devolver um erro ao enviar um email inexistente no banco', async function () {
+  it('Testa se é possível cadastrar um produto com sucesso', async function () {
     const httpRequestBody = productMock.validReq;
 
     const mockReturn = ProductModel.build(productMock.validRes);
@@ -21,7 +21,7 @@ describe('POST /products', function () {
       .post('/products')
       .send(httpRequestBody);
 
-    expect(response.body).to.be.equal(productMock.validRes);
+    expect(response.body).to.be.deep.equal(productMock.validRes);
     expect(response.status).to.eq(201);
   });
 });
