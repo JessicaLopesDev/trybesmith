@@ -16,6 +16,15 @@ const ProductsService = {
     };
     return responseService;
   },
+
+  findAll: async (): Promise<ServiceResponse<Product[]>> => {
+    const products = await ProductModel.findAll();
+    const responseService: ServiceResponse<Product[]> = {
+      status: 'SUCCESSFUL',
+      data: products.map((item) => item.dataValues),
+    };
+    return responseService;
+  },
 };
 
 export default ProductsService;

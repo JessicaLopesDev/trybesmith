@@ -5,7 +5,6 @@ import mapStatusHTTP from '../utils/mapStatusHTTP';
 const ProductsController = {
   create: async (req: Request, res: Response): Promise<Response> => {
     const { name, price, orderId } = req.body;
-    console.log(name, price, orderId);
     const serviceResponse = await ProductsService.create({
       name,
       price,
@@ -17,6 +16,16 @@ const ProductsController = {
         .json(serviceResponse.data);
     }
     return res.status(201).json(serviceResponse.data);
+  },
+
+  findAll: async (req: Request, res: Response): Promise<Response> => {
+    const serviceResponse = await ProductsService.findAll();
+    if (serviceResponse.status !== 'SUCCESSFUL') {
+      return res
+        .status(mapStatusHTTP(serviceResponse.status))
+        .json(serviceResponse.data);
+    }
+    return res.status(200).json(serviceResponse.data);
   },
 };
 
