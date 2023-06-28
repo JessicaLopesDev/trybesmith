@@ -1,9 +1,9 @@
 import express from 'express';
 
-// import OrdersController from '../controllers/ordersController';
+import OrdersController from '../controllers/OrdersController';
 
 const ordersRouter = express.Router();
 
-// ordersRouter.post('/', OrdersController.create);
+ordersRouter.get('/', OrdersController.findAll);
 
 export default ordersRouter;
