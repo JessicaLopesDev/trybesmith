@@ -14,11 +14,13 @@ const OrdersService = {
       attributes: ['id', 'userId'],
       include: [{ model: ProductModel, as: 'productIds', attributes: ['id'] }],
     });
-    const ordersResponse = orders.map(({ dataValues }) => ({
-      id: dataValues.id,
-      userId: dataValues.userId,
-      productIds: dataValues.productIds?.map((item) => item.id),
-    }));
+    const ordersResponse = orders.map(
+      ({ id, userId, productIds }: OrderProps) => ({
+        id: id,
+        userId: userId,
+        productIds: productIds?.map((item) => item),
+      }),
+    );
     const response: ServiceResponse<OrderProps[]> = {
       status: 'SUCCESSFUL',
       data: ordersResponse,
